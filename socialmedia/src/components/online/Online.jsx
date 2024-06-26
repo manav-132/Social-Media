@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Online({profile}) {
-  const PF="http://localhost:8800/images/"
+  const PF="https://socialmediabackend-la58.onrender.com/images/"
   return (
     <li id="friend" className='flex items-center mb-4'>
       <div id="imgcontainer" className='mr-10 relative'>

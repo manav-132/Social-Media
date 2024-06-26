@@ -18,7 +18,7 @@ export default function Register() {
                 password:password.current.value,
             }
             try{
-                await axios.post("http://localhost:8800/api/auth/register",user)
+                await axios.post("https://socialmediabackend-la58.onrender.com/api/auth/register",user)
                 window.location.href = "/login";
             }catch(err){
                 console.log(err);

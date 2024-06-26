@@ -20,19 +20,19 @@ function Share() {
       data.append("name",filename)
       newpost.img=filename;
       try {
-        await axios.post("http://localhost:8800/api/upload",data)
+        await axios.post("https://socialmediabackend-la58.onrender.com/api/upload",data)
       } catch (error) {
         console.log(error)
       }
     }
     try{
-      await axios.post("http://localhost:8800/api/post",newpost)
+      await axios.post("https://socialmediabackend-la58.onrender.com/api/post",newpost)
       window.location.reload()
     }catch(err){
 
     }
   }
- const PF="http://localhost:8800/images"
+ const PF="https://socialmediabackend-la58.onrender.com/images/"
   return (
     <div className='w-full rounded-xl shadow-xl shadow-gray-400 m-5'>
         <div className='p-3'>

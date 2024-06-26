@@ -1,12 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import pic from "../../../assets/profile/pic2.jpeg"; // Import the image
 import 'tailwindcss/tailwind.css';
 import {Link}from "react-router-dom"
 import {Authcontext} from "../../context/authcontext"
+import axios from 'axios';
 function Header() {
   const {user}=useContext(Authcontext)
-  const PF="http://localhost:8800/images/"
+  const [search,setsearch]=useState("");
+  const PF="https://socialmediabackend-la58.onrender.com/images/"
+
+  const handelSearch=async()=>{
+    try {
+     const responce= await axios.get(`https://socialmediabackend-la58.onrender.com/api/users/search/${search}`)
+     if(responce.data.exists){
+      console.log(responce.data.exists)
+      window.location.href = `http://localhost:5173/profile/${search}`
+     }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  const handelChange=(e)=>{
+    e.preventDefault()
+    setsearch(e.target.value)
+  }
   return (
     <div className='h-14 w-full bg-blue-600 flex items-center sticky top-0 z-[999]'>
 
@@ -23,8 +41,8 @@ function Header() {
 
       <div id="headercenter" className='flex flex-grow'>
         <div id="searchbar" className='w-full h-8 bg-white rounded-3xl flex items-center'>
-          <Search className='text-lg ml-3'/>
-          <input placeholder='search for friend, post, or video' className='border-none w-4/5 outline-none'></input>
+          <Search className='text-lg ml-3' onClick={handelSearch}/>
+          <input placeholder='search for friend, post, or video' className='border-none w-4/5 outline-none' onChange={handelChange}></input>
         </div>
       </div>
 
@@ -32,8 +50,9 @@ function Header() {
 
       <div id="headerright" className=' flex flex-grow items-center justify-around'>
                 <div id="topbarlinks" className='mr-3 text-xs cursor-pointer'>
-                  <span id="topbarlink" className='mr-3 text-lg text-white cursor-pointer'>Homepage</span>
-                  <span id="topbarlink" className='mr-3 text-lg text-white cursor-pointer'>Timeline</span>
+                <Link to="/">
+                  <span id="topbarlink" className='mr-3 text-lg text-white cursor-pointer' >Homepage</span>
+                  </Link>
                 </div>
 
                 <div id="topbaricon" className='flex '>

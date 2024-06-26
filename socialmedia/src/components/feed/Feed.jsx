@@ -18,8 +18,8 @@ console.log("from main page")
     // Use ternary operator to conditionally call axios.get()
     const fetchData = () => {
       return username
-        ? axios.get('http://localhost:8800/api/post/profile/'+username)
-        : axios.get('http://localhost:8800/api/post/timeline/hello/'+user._id);
+        ? axios.get('https://socialmediabackend-la58.onrender.com/api/post/profile/'+username)
+        : axios.get('https://socialmediabackend-la58.onrender.com/api/post/timeline/hello/'+user._id);
     };
   
     fetchData()

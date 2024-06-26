@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { Authcontext } from '../../context/authcontext';
 import {Add, Remove} from '@material-ui/icons'
 
-const PF="http://localhost:8800/images/"
+const PF="https://socialmediabackend-la58.onrender.com/images/"
 function Rightbar({user}) {
   // console.log(user.city)
 const [friends,setfriends]=useState([])
@@ -28,11 +28,11 @@ useEffect(()=>{
 const handelClick=async()=>{
   try {
     if(followed){
-      await axios.put(`http://localhost:8800/api/users/${user._id}/unfollow`,{userId:currentuser._id})
+      await axios.put(`https://socialmediabackend-la58.onrender.com/api/users/${user._id}/unfollow`,{userId:currentuser._id})
       dispatch({type:"UNFOLLOW",payload:user._id})
     }
     else{
-      await axios.put(`http://localhost:8800/api/users/${user._id}/follow`,{userId:currentuser._id})
+      await axios.put(`https://socialmediabackend-la58.onrender.com/api/users/${user._id}/follow`,{userId:currentuser._id})
       dispatch({type:"FOLLOW",payload:user._id})
     }
   } catch (error) {
@@ -44,12 +44,22 @@ const handelLogout=()=>{
   localStorage.removeItem('user');
     window.location.href = "/login";
 }
+const handelDelete=async()=>{
+    try{
+      await axios.delete(`https://socialmediabackend-la58.onrender.com/api/users/delete/${user._id}`)
+      localStorage.removeItem('user');
+      window.location.href = "/login";
+    }
+    catch(err){
+      console.log(err)
+    }
+}
 
 
 useEffect(()=>{
   const getfriends=async()=>{
     try {
-      const friendlist=await axios.get(`http://localhost:8800/api/users/friends/${user._id}`)
+      const friendlist=await axios.get(`https://socialmediabackend-la58.onrender.com/api/users/friends/${user._id}`)
       setfriends(friendlist.data)
     } catch (error) {
       console.log(error)
@@ -85,7 +95,8 @@ const Profilerightbar=()=>{
   return (
   <>
   <center>
-   { user.username=== currentuser.username &&( <button className='bg-[#1872f2]  text-white rounded-md px-1 py-2' onClick={handelLogout}>Logout</button>)}
+   { user.username=== currentuser.username &&( <button className='bg-[#1872f2]  text-white rounded-md px-1 py-2' onClick={handelLogout}>Logout</button>)}<br /><br />
+   { user.username=== currentuser.username &&( <button className='bg-[#1872f2]  text-white rounded-md px-1 py-2' onClick={handelDelete}>Delete User</button>)}
   {user.username!== currentuser.username &&(
       <button id="rightbarfollowbutton" className='mt-8 mb-3 border-none bg-[#1872f2] text-white rounded-md px-1 py-2 flex items-center cursor-pointer font-medium' onClick={handelClick}>
         {!followed?"follow":"unfollow"}

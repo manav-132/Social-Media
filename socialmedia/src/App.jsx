@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Home from './pages/home/Home'
-import { Person } from "@material-ui/icons"
 import Profile from './pages/home/Profile'
 import Login from './pages/login/Login'
 import Register from './pages/register/Register'
@@ -8,7 +7,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate // Import Navigate
+  Navigate 
 } from "react-router-dom";
 import { useContext } from "react";
 import { Authcontext } from "./context/authcontext";
@@ -21,7 +20,7 @@ function App() {
         <Route
           exact
           path="/"
-          element={user ? <Home /> : <Navigate to="/register" />} // Use Navigate to redirect
+          element={user ? <Home /> : <Navigate to="/register" />} 
         />
         <Route
           path="/login"

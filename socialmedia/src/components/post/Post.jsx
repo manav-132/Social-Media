@@ -15,21 +15,21 @@ function Post({post}) {
     const{user:currentuser}=useContext(Authcontext)
    const likeHandler=()=>{
       try{
-        axios.put(`http://localhost:8800/api/post/${post._id}/like`,{userId:currentuser._id})
+        axios.put(`https://socialmediabackend-la58.onrender.com/api/post/${post._id}/like`,{userId:currentuser._id})
       }catch(err){
 
       }
             setlike(islike ? like-1:like+1)
             setislike(!islike);
    }
-  const PF="http://localhost:8800/images/"
-  const AF="http://localhost:8800/images"
+  const PF="https://socialmediabackend-la58.onrender.com/images/"
+  const AF="https://socialmediabackend-la58.onrender.com/images/"
 
   useEffect(()=>{
     setislike(post.likes.includes(currentuser._id))
   },[currentuser._id,post.likes])
   useEffect(() => {
-    axios.get(`http://localhost:8800/api/users?userId=${post.userId}`)
+    axios.get(`https://socialmediabackend-la58.onrender.com/api/users?userId=${post.userId}`)
   .then(response => setUser(response.data))
   .catch(error => console.error('Error fetching data:', error));
   }, [post.userId]);

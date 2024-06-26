@@ -2,7 +2,7 @@ import React from 'react'
 
 function Friend({profile}) {
 
-  const PF="http://localhost:8800/images/"
+  const PF="https://socialmediabackend-la58.onrender.com/images/"
 
   return (
     <li className='flex  items-center mb-4'>
